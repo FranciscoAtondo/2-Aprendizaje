@@ -7,7 +7,7 @@ import random
 url = "https://archive.ics.uci.edu/static/public/58/lenses.zip"
 archivo = "datos/lentes.zip"
 archivo_datos = "datos/lenses.data"
-atributos = ['Lentes'] + [f'feature_{i}' for i in range(1, 24)]
+atributos = ['Lentes', 'Edad', 'Prescripcion', 'Astigmatico', 'Tasa_Tira']
 
 # Descarga datos
 if not os.path.exists("datos"):
@@ -16,30 +16,41 @@ if not os.path.exists(archivo):
     util.descarga_datos(url, archivo)
     util.descomprime_zip(archivo)
 
-
-'''
-
-'''
-#Extrae datos
+# Cargar los datos
 datos = util.lee_csv(
     archivo_datos,
     atributos=atributos,
     separador=","
 )
 
-alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-for d in datos:
-    print(f"Lentes: {d['Lentes']}")  # 👀 Ver qué valores tiene antes de la conversión
-    if d['Lentes'] not in alphabet:
-        print(f"❌ Valor inesperado en 'Lentes': {d['Lentes']}")
 '''
-for d in datos:
-    d['Lentes'] = alphabet.index(d['Lentes'])
-    for i in range(1, 24):
-        d[f'feature_{i}'] = float(d[f'feature_{i}'])
+a. Clase de Paciente
+    1- Paciente debe tener Lentes Duros
+    2- Paciente debe tener Lentes Suaves
+    3- Paciente no necesita lentes.
+b. Edad
+    1- Joven
+    2- Pre-Presbicio
+    3- Presbicio
+c. Prescripcion
+    1- Miope
+    2- Hipermiope
+d. Astigmatico
+    1- No
+    2- Si
+e. Tasa de Tira
+    1- Reducido
+    2- Normal
 
-# Selecciona los artributos
+for d in datos:
+    print(f"Lentes: {d['Lentes']}") # Revision de valores
+'''
+
+# Convertir los datos a enteros (si no lo están)
+for d in datos:
+    for key in atributos:
+        d[key] = int(d[key])
+
 target = 'Lentes'
-atributos = [target] + [f'feature_{i}' for i in range(1, 17)]
-'''
+atributos_entrada = ['Edad', 'Prescripcion', 'Astigmatico', 'Tasa_Tira']
+
