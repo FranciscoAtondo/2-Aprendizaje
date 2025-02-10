@@ -1,5 +1,5 @@
-import utileria as util #ut a util
-import bosque_aleatorio as BA #ba a BA
+import utileria as util
+import bosque_aleatorio as BA
 import os
 import random
 
